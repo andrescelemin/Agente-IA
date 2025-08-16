@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "site": {
+    "name": "Smart Fox",
+    "language": "es",
+    "baseHref": "/Agente-IA/",
+    "url": "https://andrescelemin.github.io/Agente-IA/"
+  },
+  "seo": {
+    "title": "Smart Fox — IA que impulsa tu negocio",
+    "description": "Smart Fox: implementamos un Agente de IA para atención, ventas y soporte. Chatea ahora y obtén respuestas en segundos.",
+    "themeColor": "#ff6a00",
+    "ogImage": "logo-smartfox.jpg",
+    "favicon": "logo-smartfox.webp"
+  },
+  "assets": {
+    "logoWebp": "logo-smartfox.webp",
+    "logoJpg": "logo-smartfox.jpg"
+  },
+  "branding": {
+    "primary": "#ff6a00",
+    "primary600": "#f25f00",
+    "primary700": "#d94f00",
+    "ink": "#0f172a",
+    "ink2": "#1f2937",
+    "muted": "#6b7280",
+    "bg": "#0b1020",
+    "card": "#121a33",
+    "ring": "rgba(255,106,0,0.35)"
+  },
+  "n8nTheme": {
+    "--chat--color-primary": "#ff6a00",
+    "--chat--color-primary-shade-50": "#f25f00",
+    "--chat--color-primary-shade-100": "#d94f00",
+    "--chat--color-secondary": "#2563eb",
+    "--chat--color-white": "#ffffff",
+    "--chat--color-light": "#f3f4f6",
+    "--chat--color-light-shade-50": "#e5e7eb",
+    "--chat--color-light-shade-100": "#d1d5db",
+    "--chat--color-medium": "#9ca3af",
+    "--chat--color-dark": "#0b1226",
+    "--chat--color-disabled": "#4b5563",
+    "--chat--color-typing": "#e5e7eb",
+    "--chat--spacing": "0.9rem",
+    "--chat--border-radius": "14px",
+    "--chat--transition-duration": "0.18s",
+    "--chat--window--width": "420px",
+    "--chat--window--height": "640px",
+    "--chat--header--background": "#0f172a",
+    "--chat--header--color": "#e5e7eb",
+    "--chat--heading--font-size": "1.25rem",
+    "--chat--subtitle--line-height": "1.5",
+    "--chat--textarea--height": "56px",
+    "--chat--message--font-size": "1rem",
+    "--chat--message--bot--background": "#0f172a",
+    "--chat--message--bot--color": "#e5e7eb",
+    "--chat--message--user--background": "linear-gradient(180deg,#ff6a00,#d94f00)",
+    "--chat--message--user--color": "#ffffff",
+    "--chat--toggle--background": "#ff6a00",
+    "--chat--toggle--hover--background": "#f25f00",
+    "--chat--toggle--active--background": "#d94f00",
+    "--chat--toggle--color": "#ffffff",
+    "--chat--toggle--size": "64px"
+  },
+  "chat": {
+    "webhookUrl": "https://smartfox-latam.app.n8n.cloud/webhook/53c136fe-3e77-4709-a143-fe82746dd8b6/chat",
+    "showWelcomeScreen": true,
+    "loadPreviousSession": true,
+    "enableStreaming": false,
+    "allowFileUploads": false,
+    "i18n": {
+      "en": {
+        "title": "¡Hola! 👋",
+        "subtitle": "Inicia un chat. Estamos disponibles 24/7.",
+        "getStarted": "Comenzar",
+        "inputPlaceholder": "Escribe tu consulta…",
+        "footer": ""
+      },
+      "es": {
+        "title": "¡Hola! 👋",
+        "subtitle": "Inicia un chat. Estamos disponibles 24/7.",
+        "getStarted": "Comenzar",
+        "inputPlaceholder": "Escribe tu consulta…",
+        "footer": ""
+      }
+    },
+    "initialMessages": [
+      "¡Hola! Soy el Agente de Smart Fox. ¿En qué puedo ayudarte hoy?"
+    ]
+  },
+  "demo": {
+    "shortcuts": [
+      {
+        "label": "Agendar asesoría",
+        "prompt": "Quiero agendar una asesoría con Smart Fox esta semana"
+      },
+      {
+        "label": "Ver servicios",
+        "prompt": "¿Qué servicios ofrece Smart Fox y cuáles son sus precios?"
+      },
+      {
+        "label": "Soporte",
+        "prompt": "Necesito soporte técnico para una integración de WhatsApp/n8n"
+      }
+    ]
+  },
+  "cors": {
+    "allowedOrigins": [
+      "https://andrescelemin.github.io",
+      "https://andrescelemin.github.io/Agente-IA"
+    ]
+  }
+}

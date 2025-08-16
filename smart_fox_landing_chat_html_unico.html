@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart Fox — IA que impulsa tu negocio</title>
+  <meta name="description" content="Smart Fox: implementamos un Agente de IA para atención, ventas y soporte. Chatea ahora y obtén respuestas en segundos." />
+  <meta property="og:title" content="Smart Fox — IA que impulsa tu negocio" />
+  <meta property="og:description" content="Habla con nuestro Agente de IA. Responde preguntas, agenda asesorías y registra solicitudes." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#ff6a00" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- n8n chat styles -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat@latest/dist/style.css?v=1" rel="stylesheet" />
+  <style>
+    :root{
+      --brand:#ff6a00;           /* naranja Smart Fox */
+      --brand-600:#f25f00;
+      --brand-700:#d94f00;
+      --ink:#0f172a;             /* slate-900 */
+      --ink-2:#1f2937;           /* gray-800 */
+      --muted:#6b7280;           /* gray-500 */
+      --bg:#0b1020;              /* fondo oscuro elegante */
+      --card:#121a33;            /* tarjetas */
+      --ring: rgba(255,106,0,.35);
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      color:#e5e7eb; background: radial-gradient(1200px 600px at 10% -10%, rgba(255,106,0,.15), transparent 60%),
+                       radial-gradient(1200px 600px at 100% 0%, rgba(59,130,246,.12), transparent 60%),
+                       var(--bg);
+    }
+    a{ color:inherit; text-decoration:none }
+    .container{ width:min(1100px, 92vw); margin-inline:auto }
+    .btn{ display:inline-flex; align-items:center; gap:.65rem; border:0; cursor:pointer; font-weight:600; 
+          padding:.9rem 1.1rem; border-radius:999px; background:linear-gradient(180deg,var(--brand),var(--brand-700));
+          color:white; box-shadow:0 8px 30px -6px var(--ring); transition:transform .15s ease, box-shadow .2s ease }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 14px 36px -10px var(--ring) }
+    .btn.secondary{ background:#ffffff10; border:1px solid #ffffff22 }
+
+    /* HERO */
+    header.hero{ padding:clamp(2rem, 6vw, 4rem) 0 3rem; position:relative; overflow:hidden }
+    .brand{ display:flex; align-items:center; gap:.8rem }
+    .fox{ width:34px; height:34px }
+    .badge{ display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:999px; font-size:.8rem;
+            color:#fff; background: #ffffff10; border:1px solid #ffffff22 }
+    .hero h1{ font-size: clamp(2rem, 3.4vw + .8rem, 3.5rem); line-height:1.05; margin:.9rem 0 .6rem; font-weight:800 }
+    .hero p.lead{ color:#d1d5db; font-size: clamp(1rem, 1.2vw + .6rem, 1.18rem); max-width: 62ch }
+    .hero-cta{ margin-top:1.3rem; display:flex; gap:.8rem; flex-wrap:wrap }
+
+    /* TRUST + FEATURES */
+    .trust{ display:flex; gap:1rem; flex-wrap:wrap; margin:1.6rem 0 0; color:#9ca3af; font-size:.9rem }
+    .section{ padding: 3.2rem 0 }
+    .grid{ display:grid; gap:1.2rem; grid-template-columns:repeat(12, 1fr) }
+    .card{ background:linear-gradient(180deg, #0f1833, #0c1228); border:1px solid #1b2547; border-radius:16px; padding:1.1rem; 
+           box-shadow:0 10px 18px -14px #000000aa }
+    .feature{ grid-column: span 4 / span 4 }
+    @media (max-width: 900px){ .feature{ grid-column: span 6 / span 6 } }
+    @media (max-width: 640px){ .feature{ grid-column: span 12 / span 12 } }
+    .feature h3{ margin:.6rem 0 .3rem; font-size:1.05rem }
+    .feature p{ color:#c7cad3; font-size:.98rem }
+    .icon{ width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:#ffffff10; border:1px solid #ffffff1a }
+
+    /* HOW IT WORKS */
+    .how .step{ display:flex; gap:.9rem; align-items:flex-start; padding:1rem; border-radius:14px; background:#0e1630; border:1px solid #17214a }
+    .how .step b{ color:#fff }
+
+    /* CTA STRIP */
+    .cta-rail{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem; background:linear-gradient(90deg,#131a34,#0f162e);
+               border:1px solid #1b2547; border-radius:14px }
+
+    /* FAQ */
+    details{ background:#0e1630; border:1px solid #18214a; border-radius:12px; padding:1rem 1.1rem }
+    details+details{ margin-top:.7rem }
+    summary{ cursor:pointer; font-weight:600 }
+    summary:hover{ color:#ffe6d6 }
+
+    /* FOOTER */
+    footer{ color:#9aa3b2; padding:2.2rem 0; border-top:1px solid #1b2547; background:linear-gradient(180deg, transparent, #0b1226) }
+
+    /* --- Agent Overlay (embedded fullscreen chat) --- */
+    #agent-overlay{ position:fixed; inset:0; background:rgba(6,10,22,.62); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+                    display:none; z-index:60; }
+    #agent-overlay.open{ display:block }
+    .agent-sheet{ position:absolute; inset: min(5vh,36px) min(5vw,36px); background:#0a0f22; border:1px solid #1c274d; border-radius:18px;
+                   display:grid; grid-template-rows:auto 1fr; overflow:hidden }
+    .agent-header{ display:flex; align-items:center; justify-content:space-between; gap:.8rem; padding:.8rem 1rem; border-bottom:1px solid #1b2547; background:#0f172a }
+    .agent-title{ display:flex; align-items:center; gap:.7rem; font-weight:700 }
+    .agent-actions{ display:flex; align-items:center; gap:.5rem }
+    .chip{ display:inline-flex; align-items:center; gap:.35rem; border:1px solid #ffffff22; background:#ffffff10; color:#fff; border-radius:999px; padding:.42rem .7rem; font-size:.9rem }
+    .chip:hover{ border-color:#ffffff45 }
+    .icon-btn{ background:#ffffff10; border:1px solid #ffffff22; color:#fff; border-radius:999px; width:38px; height:38px; display:grid; place-items:center; cursor:pointer }
+
+    /* --- Theme n8n chat via CSS vars --- */
+    :root{
+      --chat--color-primary: var(--brand);
+      --chat--color-primary-shade-50: var(--brand-600);
+      --chat--color-primary-shade-100: var(--brand-700);
+      --chat--color-secondary: #2563eb; /* azul de acento */
+      --chat--color-white:#fff; --chat--color-light:#f3f4f6; --chat--color-light-shade-50:#e5e7eb; --chat--color-light-shade-100:#d1d5db;
+      --chat--color-medium:#9ca3af; --chat--color-dark:#0b1226; --chat--color-disabled:#4b5563; --chat--color-typing:#e5e7eb;
+      --chat--spacing: .9rem; --chat--border-radius: 14px; --chat--transition-duration: .18s; --chat--window--width: 420px; --chat--window--height: 640px;
+      --chat--header--background:#0f172a; --chat--header--color:#e5e7eb; --chat--heading--font-size:1.25rem; --chat--subtitle--line-height:1.5;
+      --chat--textarea--height:56px; --chat--message--font-size:1rem; --chat--message--bot--background:#0f172a; --chat--message--bot--color:#e5e7eb;
+      --chat--message--user--background:linear-gradient(180deg,var(--brand),var(--brand-700)); --chat--message--user--color:#fff;
+      --chat--toggle--background: var(--brand); --chat--toggle--hover--background:var(--brand-600); --chat--toggle--active--background:var(--brand-700); --chat--toggle--color:#fff; --chat--toggle--size:64px;
+    }
+
+    /* Utilities */
+    .mt-0{ margin-top:0 } .mt-1{ margin-top:.25rem } .mt-2{ margin-top:.5rem } .mt-3{ margin-top:.75rem } .mt-4{ margin-top:1rem } .mt-6{ margin-top:1.5rem }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="brand">
+        <!-- Minimal Fox Logo (SVG) -->
+        <svg class="fox" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 12c8 2 16 2 26-6c10 8 18 8 26 6c-1 10-7 17-16 21l-10 5l-10-5C13 29 7 22 6 12z" fill="url(#g)"/>
+          <path d="M12 40c6 3 13 5 20 5s14-2 20-5c-4 8-12 14-20 14S16 48 12 40z" fill="#f8fafc" opacity=".08"/>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#ff8a33"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs>
+        </svg>
+        <strong>Smart Fox</strong>
+        <span class="badge">Agente de IA en tu sitio</span>
+      </div>
+
+      <h1>Convierte visitas en conversaciones<br/>y conversaciones en clientes</h1>
+      <p class="lead">Nuestro Agente de IA atiende 24/7: responde preguntas, recomienda productos/servicios, agenda asesorías y recoge tus datos de contacto. Todo desde esta página.</p>
+
+      <div class="hero-cta">
+        <button class="btn" onclick="window.openAgent('Hola, quiero saber cómo Smart Fox puede ayudar a mi negocio. ¿Puedes darme una demo?')">
+          <!-- chat icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12a8 8 0 1 1-3.6-6.7L22 4l-1.6 4.2A8 8 0 0 1 21 12Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          Hablar con el Agente</button>
+        <a class="btn secondary" href="#como-funciona">Cómo interactuar</a>
+      </div>
+
+      <div class="trust">
+        <span>⚡ Respuestas en segundos</span>·
+        <span>🔒 Privacidad y seguridad</span>·
+        <span>🛠️ Integrable con tu stack (CRM, WhatsApp, Calendly)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <section class="section container">
+    <div class="grid">
+      <article class="feature card">
+        <div class="icon">💬</div>
+        <h3>Atención instantánea</h3>
+        <p>Responde preguntas frecuentes, explica servicios y cualifica leads sin esperar a un agente humano.</p>
+      </article>
+      <article class="feature card">
+        <div class="icon">📅</div>
+        <h3>Agenda y recordatorios</h3>
+        <p>Propone horarios y agenda reuniones/asesorías. Envía confirmaciones por correo o WhatsApp.</p>
+      </article>
+      <article class="feature card">
+        <div class="icon">🧠</div>
+        <h3>Conocimiento de tu marca</h3>
+        <p>Entrenado con tus documentos, URLs y FAQs. Mantiene el contexto a lo largo de la conversación.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS / INTERACCIÓN -->
+  <section class="section container" id="como-funciona">
+    <h2 class="mt-0">Interactúa con el Agente en 3 pasos</h2>
+    <div class="grid mt-3" style="grid-template-columns: repeat(12,1fr); gap:1rem;">
+      <div class="card step" style="grid-column: span 4 / span 4;">
+        <b>1) Abre el chat</b>
+        <span>Haz clic en <em>Hablar con el Agente</em>. Se abrirá una ventana con la conversación.</span>
+      </div>
+      <div class="card step" style="grid-column: span 4 / span 4;">
+        <b>2) Elige un objetivo</b>
+        <span>Pregunta por <em>servicios</em>, <em>precios</em>, <em>agenda</em> o <em>soporte</em>. También puedes adjuntar archivos si está habilitado.</span>
+      </div>
+      <div class="card step" style="grid-column: span 4 / span 4;">
+        <b>3) Recibe ayuda</b>
+        <span>El agente responde, te guía paso a paso y, si lo requieres, te deriva con una persona de Smart Fox.</span>
+      </div>
+    </div>
+
+    <div class="cta-rail mt-4">
+      <div>
+        <div class="mt-0" style="font-weight:700">¿No sabes por dónde empezar?</div>
+        <div class="mt-1" style="color:#cbd5e1">Prueba con un clic. El agente iniciará la conversación con ese tema.</div>
+      </div>
+      <div class="agent-actions">
+        <button class="chip" onclick="window.openAgent('Quiero agendar una asesoría con Smart Fox esta semana')">Agendar asesoría</button>
+        <button class="chip" onclick="window.openAgent('¿Qué servicios ofrece Smart Fox y cuáles son sus precios?')">Ver servicios</button>
+        <button class="chip" onclick="window.openAgent('Necesito soporte técnico para una integración de WhatsApp/n8n')">Soporte</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section container">
+    <h2 class="mt-0">Preguntas frecuentes</h2>
+    <details class="mt-3" open>
+      <summary>¿El agente es 24/7 y en español?</summary>
+      <div class="mt-2">Sí. Responde en español neutro y está disponible todo el día. También podemos activar otros idiomas si tu negocio lo requiere.</div>
+    </details>
+    <details>
+      <summary>¿Puedo integrarlo con mi CRM o WhatsApp?</summary>
+      <div class="mt-2">Claro. Smart Fox integra nativamente con n8n para conectar CRMs, correo, WhatsApp Business, Google Calendar y más.</div>
+    </details>
+    <details>
+      <summary>¿El chat mantiene el historial?</summary>
+      <div class="mt-2">Sí, al volver a abrirlo recuperarás tu sesión anterior en este dispositivo.</div>
+    </details>
+  </section>
+
+  <!-- FOOTER / CTA -->
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+      <div style="display:flex; align-items:center; gap:.6rem; color:#cbd5e1;">
+        <svg class="fox" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 12c8 2 16 2 26-6c10 8 18 8 26 6c-1 10-7 17-16 21l-10 5l-10-5C13 29 7 22 6 12z" fill="url(#g2)"/>
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#ff8a33"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs>
+        </svg>
+        <strong>Smart Fox</strong>
+      </div>
+      <div>
+        <button class="btn" onclick="window.openAgent()">Iniciar Chat</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Agent Overlay (embedded @n8n/chat) -->
+  <div id="agent-overlay" role="dialog" aria-modal="true" aria-label="Chat de Smart Fox">
+    <div class="agent-sheet">
+      <div class="agent-header">
+        <div class="agent-title">
+          <svg width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 12c8 2 16 2 26-6c10 8 18 8 26 6c-1 10-7 17-16 21l-10 5l-10-5C13 29 7 22 6 12z" fill="url(#g3)"/><defs><linearGradient id="g3" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#ff8a33"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs></svg>
+          <span>Agente Smart Fox</span>
+        </div>
+        <div class="agent-actions">
+          <button class="icon-btn" onclick="document.getElementById('agent-overlay').classList.remove('open')" aria-label="Cerrar chat">✕</button>
+        </div>
+      </div>
+      <div id="n8n-chat" style="height:100%; width:100%;"></div>
+    </div>
+  </div>
+
+  <!-- n8n chat script -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat@latest/dist/chat.bundle.es.js?v=1';
+
+    const defaults = {
+      webhookUrl: 'https://smartfox-latam.app.n8n.cloud/webhook/53c136fe-3e77-4709-a143-fe82746dd8b6/chat',
+      target: '#n8n-chat',
+      mode: 'fullscreen',
+      loadPreviousSession: true,
+      showWelcomeScreen: true,
+      enableStreaming: false, // actívalo si tu workflow usa streaming
+      // Permitir adjuntar archivos si tu flujo lo soporta
+      // allowFileUploads: true,
+      i18n: {
+        en: { // la clave sigue siendo "en" aunque el texto esté en español
+          title: '¡Hola! 👋',
+          subtitle: 'Inicia un chat. Estamos disponibles 24/7.',
+          getStarted: 'Comenzar',
+          inputPlaceholder: 'Escribe tu consulta…',
+          footer: ''
+        }
+      },
+      initialMessages: [
+        '¡Hola! Soy el Agente de Smart Fox. ¿En qué puedo ayudarte hoy?'
+      ]
+    };
+
+    let chatInstance = null;
+
+    function mountChat(initialMsgs){
+      const host = document.querySelector('#n8n-chat');
+      if (!host) return;
+      host.innerHTML = ''; // reinicia el contenedor para re-montar el chat
+      const opts = { ...defaults, initialMessages: initialMsgs && initialMsgs.length ? initialMsgs : defaults.initialMessages };
+      chatInstance = createChat(opts);
+    }
+
+    // expone una función global para abrir el agente con un mensaje opcional
+    window.openAgent = (prompt) => {
+      document.getElementById('agent-overlay').classList.add('open');
+      const msgs = prompt ? [String(prompt)] : null;
+      mountChat(msgs);
+    };
+
+    // ESC para cerrar
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') document.getElementById('agent-overlay').classList.remove('open');
+    });
+  </script>
+</body>
+</html>

@@ -11,6 +11,7 @@
   <meta name="theme-color" content="#ff6a00" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <!-- n8n chat styles -->
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat@latest/dist/style.css?v=1" rel="stylesheet" />
@@ -112,6 +113,20 @@
 
     /* Utilities */
     .mt-0{ margin-top:0 } .mt-1{ margin-top:.25rem } .mt-2{ margin-top:.5rem } .mt-3{ margin-top:.75rem } .mt-4{ margin-top:1rem } .mt-6{ margin-top:1.5rem }
+    /* White-label demo block */
+    .wl .pill{display:inline-flex;align-items:center;gap:.45rem;padding:.32rem .6rem;border-radius:999px;font-size:.8rem;color:#fff;background:#ffffff12;border:1px solid #ffffff24}
+    .wl-wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem}
+    .wl-col{grid-column:span 6 / span 6}
+    @media (max-width: 900px){.wl-col{grid-column:span 12 / span 12}}
+    .wl-list{margin:.7rem 0 1.1rem;padding-left:1rem;color:#c7cad3}
+    .wl-list li{margin:.35rem 0}
+    .wl-card{background:linear-gradient(180deg,#101a39,#0b1229);border:1px solid #1b2547;border-radius:16px;padding:1rem}
+    .wl-mock{border:1px dashed #2b3967;border-radius:14px;padding:1rem;background:#0f172a}
+    .wl-mock .dot{width:6px;height:6px;background:#475569;border-radius:999px;display:inline-block;margin-right:4px}
+    .msg{font-size:.98rem;padding:.6rem .8rem;border-radius:12px;margin:.5rem 0;max-width:38ch}
+    .msg.bot{background:#0b1226;color:#e5e7eb}
+    .msg.you{background:linear-gradient(180deg,var(--brand),var(--brand-700));color:#fff;margin-left:auto}
+    .wl-cta{display:flex;gap:.6rem;flex-wrap:wrap}
   </style>
 </head>
 <body>
@@ -147,6 +162,36 @@
       </div>
     </div>
   </header>
+
+  <!-- DEMO / WHITE-LABEL -->
+  <section class="section container wl" aria-label="Demo white-label">
+    <div class="wl-wrap">
+      <div class="wl-col">
+        <div class="pill">DEMO en vivo</div>
+        <h2 class="mt-0">Este agente es un ejemplo — el tuyo llevará tu marca</h2>
+        <ul class="wl-list">
+          <li>Logo, colores y tono de tu empresa</li>
+          <li>Entrenado con tus páginas, documentos y FAQs</li>
+          <li>Flujos para ventas, soporte o reservas</li>
+          <li>Integraciones: CRM, WhatsApp, Google Calendar y más</li>
+        </ul>
+        <div class="wl-cta">
+          <button class="btn" onclick="window.openAgent('Quiero mi propio agente de IA con mi marca e integraciones')">Cotizar mi agente</button>
+          <a class="btn secondary" href="#como-funciona">Ver cómo funciona</a>
+        </div>
+      </div>
+      <div class="wl-col">
+        <div class="wl-card">
+          <div class="wl-mock">
+            <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            <div class="msg bot">Hola 👋 Soy tu agente. ¿Qué te gustaría lograr hoy?</div>
+            <div class="msg you">Quiero agendar una asesoría</div>
+            <div class="msg bot">Perfecto. ¿Qué día te conviene esta semana?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- FEATURES -->
   <section class="section container">

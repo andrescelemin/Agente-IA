@@ -19,7 +19,7 @@
   <meta property="og:image" content="logo-smartfox.jpg" />
   <meta name="twitter:image" content="logo-smartfox.jpg" />
 
-  <!-- Fuentes y estilos -->
+  <!-- Fuentes y estilos del widget -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
@@ -31,6 +31,7 @@
       --brand:#ff6a00; --brand-600:#f25f00; --brand-700:#d94f00;
       --ink:#0f172a; --ink-2:#1f2937; --muted:#6b7280;
       --bg:#0b1020; --card:#121a33; --ring: rgba(255,106,0,.35);
+
       /* n8n chat theme */
       --chat--color-primary: var(--brand);
       --chat--color-primary-shade-50: var(--brand-600);
@@ -70,7 +71,6 @@
     /* HERO */
     header.hero{ padding:clamp(2rem, 6vw, 4rem) 0 3rem; position:relative; overflow:hidden }
     .brand{ display:flex; align-items:center; gap:.8rem }
-    .fox{ width:34px; height:34px }
     .badge{ display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:999px; font-size:.8rem;
             color:#fff; background:#ffffff10; border:1px solid #ffffff22 }
     .hero h1{ font-size: clamp(2rem, 3.4vw + .8rem, 3.5rem); line-height:1.05; margin:.9rem 0 .6rem; font-weight:800 }
@@ -125,6 +125,7 @@
 
     /* Utilities */
     .mt-0{ margin-top:0 } .mt-1{ margin-top:.25rem } .mt-2{ margin-top:.5rem } .mt-3{ margin-top:.75rem } .mt-4{ margin-top:1rem } .mt-6{ margin-top:1.5rem }
+
     /* White-label demo block */
     .wl .pill{display:inline-flex;align-items:center;gap:.45rem;padding:.32rem .6rem;border-radius:999px;font-size:.8rem;color:#fff;background:#ffffff12;border:1px solid #ffffff24}
     .wl-wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem}
@@ -139,6 +140,13 @@
     .msg.bot{background:#0b1226;color:#e5e7eb}
     .msg.you{background:linear-gradient(180deg,var(--brand),var(--brand-700));color:#fff;margin-left:auto}
     .wl-cta{display:flex;gap:.6rem;flex-wrap:wrap}
+
+    /* LOGO (imagen) */
+    .logo-img{
+      width:34px; height:34px; border-radius:50%;
+      object-fit:cover; display:block;
+      box-shadow:0 0 0 2px #ffffff12;
+    }
   </style>
 </head>
 <body>
@@ -146,12 +154,11 @@
   <header class="hero">
     <div class="container">
       <div class="brand">
-        <!-- Minimal Fox Logo (SVG) -->
-        <svg class="fox" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M6 12c8 2 16 2 26-6c10 8 18 8 26 6c-1 10-7 17-16 21l-10 5l-10-5C13 29 7 22 6 12z" fill="url(#g)"/>
-          <path d="M12 40c6 3 13 5 20 5s14-2 20-5c-4 8-12 14-20 14S16 48 12 40z" fill="#f8fafc" opacity=".08"/>
-          <defs><linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#ff8a33"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs>
-        </svg>
+        <!-- Brand Logo -->
+        <picture>
+          <source srcset="logo-smartfox.webp" type="image/webp" />
+          <img class="logo-img" src="logo-smartfox.jpg" width="34" height="34" alt="Smart Fox" decoding="async" loading="eager" />
+        </picture>
         <strong>Smart Fox</strong>
         <span class="badge">Agente de IA en tu sitio</span>
       </div>
@@ -161,8 +168,12 @@
 
       <div class="hero-cta">
         <button class="btn" onclick="window.openAgent('Hola, quiero saber cómo Smart Fox puede ayudar a mi negocio. ¿Puedes darme una demo?')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12a8 8 0 1 1-3.6-6.7L22 4l-1.6 4.2A8 8 0 0 1 21 12Z" stroke="currentColor" stroke-width="1.6"/></svg>
-          Hablar con el Agente</button>
+          <!-- chat icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12a8 8 0 1 1-3.6-6.7L22 4l-1.6 4.2A8 8 0 0 1 21 12Z" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          Hablar con el Agente
+        </button>
         <a class="btn secondary" href="#como-funciona">Cómo interactuar</a>
       </div>
 
@@ -277,10 +288,10 @@
   <footer>
     <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
       <div style="display:flex; align-items:center; gap:.6rem; color:#cbd5e1;">
-        <svg class="fox" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M6 12c8 2 16 2 26-6c10 8 18 8 26 6c-1 10-7 17-16 21l-10 5l-10-5C13 29 7 22 6 12z" fill="url(#g2)"/>
-          <defs><linearGradient id="g2" x1="0" y="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#ff8a33"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs>
-        </svg>
+        <picture>
+          <source srcset="logo-smartfox.webp" type="image/webp" />
+          <img class="logo-img" src="logo-smartfox.jpg" width="34" height="34" alt="Smart Fox" decoding="async" loading="lazy" />
+        </picture>
         <strong>Smart Fox</strong>
       </div>
       <div>
@@ -294,7 +305,10 @@
     <div class="agent-sheet">
       <div class="agent-header">
         <div class="agent-title">
-          <svg width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 12c8 2 16 2 26-6c10 8 18 8 26 6c-1 10-7 17-16 21l-10 5l-10-5C13 29 7 22 6 12z" fill="url(#g3)"/><defs><linearGradient id="g3" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse"><stop stop-color="#ff8a33"/><stop offset="1" stop-color="#ff6a00"/></linearGradient></defs></svg>
+          <picture aria-hidden="true">
+            <source srcset="logo-smartfox.webp" type="image/webp" />
+            <img class="logo-img" src="logo-smartfox.jpg" width="22" height="22" alt="" decoding="async" loading="lazy" />
+          </picture>
           <span>Agente Smart Fox</span>
         </div>
         <div class="agent-actions">
@@ -340,12 +354,14 @@
       chatInstance = createChat(opts);
     }
 
+    // expone una función global para abrir el agente con un mensaje opcional
     window.openAgent = (prompt) => {
       document.getElementById('agent-overlay').classList.add('open');
       const msgs = prompt ? [String(prompt)] : null;
       mountChat(msgs);
     };
 
+    // ESC para cerrar
     window.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape') document.getElementById('agent-overlay').classList.remove('open');
     });

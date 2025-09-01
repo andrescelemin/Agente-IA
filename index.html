@@ -27,14 +27,14 @@
   <link rel="icon" href="logo-smartfox.webp" type="image/webp" />
   <link rel="alternate icon" href="logo-smartfox.jpg" type="image/jpeg" />
 
-  <!-- Fonts & 3rd party styles -->
+  <!-- Fuentes y estilos de terceros -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat@latest/dist/style.css?v=2" rel="stylesheet" />
 
   <!-- Tu CSS externo -->
-  <link href="/Agente-IA/styles.css?v=3" rel="stylesheet" />
+  <link rel="stylesheet" href="/Agente-IA/styles.css?v=3" />
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -52,10 +52,41 @@
   </script>
 </head>
 <body>
-  <!-- HERO, DEMO, FEATURES, HOW IT WORKS, FAQ, FOOTER -->
-  <!-- Botones editados según tus requerimientos -->
+  <!-- HERO -->
+  <header class="hero" role="banner">
+    <div class="container">
+      <div class="brand" aria-label="Marca Smart Fox">
+        <picture>
+          <source srcset="logo-smartfox.webp" type="image/webp" />
+          <img class="logo-img" src="logo-smartfox.jpg" width="34" height="34" alt="Logo Smart Fox" decoding="async" loading="eager" />
+        </picture>
+        <strong>Smart Fox</strong>
+        <span class="badge" aria-label="Etiqueta">Agente de IA en tu sitio</span>
+      </div>
 
-  <section class="section container wl">
+      <h1>Convierte visitas en conversaciones y conversaciones en clientes</h1>
+      <p class="lead">Nuestro Agente de IA atiende 24/7: responde preguntas, recomienda productos/servicios, agenda asesorías y recoge tus datos de contacto. Todo desde esta página.</p>
+
+      <div class="hero-cta" role="group" aria-label="Acciones principales">
+        <button class="btn" type="button" onclick="window.openAgent('Hola, quiero saber cómo Smart Fox puede ayudar a mi negocio. ¿Puedes darme una demo?')" aria-label="Hablar con el Agente">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12a8 8 0 1 1-3.6-6.7L22 4l-1.6 4.2A8 8 0 0 1 21 12Z" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          Hablar con el Agente
+        </button>
+        <a class="btn secondary" href="#como-funciona">Cómo interactuar</a>
+      </div>
+
+      <div class="trust" aria-label="Beneficios">
+        <span>⚡ Respuestas en segundos</span> ·
+        <span>🔒 Privacidad y seguridad</span> ·
+        <span>🛠️ Integrable (CRM, WhatsApp, Calendly)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- DEMO / WHITE-LABEL -->
+  <section class="section container wl" aria-label="Demo white-label">
     <div class="wl-wrap">
       <div class="wl-col">
         <div class="pill">DEMO en vivo</div>
@@ -73,7 +104,7 @@
         </div>
       </div>
       <div class="wl-col">
-        <div class="wl-card">
+        <div class="wl-card" role="img" aria-label="Vista previa de conversación con el agente">
           <div class="wl-mock">
             <div class="dot"></div><div class="dot"></div><div class="dot"></div>
             <div class="msg bot">Hola 👋 Soy tu agente. ¿Qué te gustaría lograr hoy?</div>
@@ -85,9 +116,31 @@
     </div>
   </section>
 
+  <!-- FEATURES -->
+  <section class="section container" aria-label="Características">
+    <div class="grid cols-3">
+      <article class="feature card">
+        <div class="icon" aria-hidden="true">💬</div>
+        <h3>Atención instantánea</h3>
+        <p>Responde preguntas frecuentes, explica servicios y cualifica leads sin esperar a un agente humano.</p>
+      </article>
+      <article class="feature card">
+        <div class="icon" aria-hidden="true">📅</div>
+        <h3>Agenda y recordatorios</h3>
+        <p>Propone horarios y agenda reuniones/asesorías. Envía confirmaciones por correo o WhatsApp.</p>
+      </article>
+      <article class="feature card">
+        <div class="icon" aria-hidden="true">🧠</div>
+        <h3>Conocimiento de tu marca</h3>
+        <p>Entrenado con tus documentos, URLs y FAQs. Mantiene el contexto a lo largo de la conversación.</p>
+      </article>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS / INTERACCIÓN -->
-  <section class="section container" id="como-funciona">
+  <section class="section container" id="como-funciona" aria-label="Cómo interactuar">
     <h2 class="mt-0">Interactúa con el Agente en 3 pasos</h2>
+
     <div class="grid steps mt-3">
       <div class="card step">
         <b>1) Abre el chat</b>
@@ -103,7 +156,7 @@
       </div>
     </div>
 
-    <div class="cta-rail mt-4">
+    <div class="cta-rail mt-4" role="region" aria-label="Accesos rápidos">
       <div>
         <div class="mt-0" style="font-weight:700">¿No sabes por dónde empezar?</div>
         <div class="mt-1" style="color:#cbd5e1">Prueba con un clic. El agente iniciará la conversación con ese tema.</div>
@@ -119,6 +172,104 @@
     </div>
   </section>
 
-  <!-- FOOTER y overlay n8n chat se mantienen -->
+  <!-- FAQ -->
+  <section class="section container" aria-label="Preguntas frecuentes">
+    <h2 class="mt-0">Preguntas frecuentes</h2>
+    <details class="mt-3" open>
+      <summary>¿El agente es 24/7 y en español?</summary>
+      <div class="mt-2">Sí. Responde en español neutro y está disponible todo el día. También podemos activar otros idiomas si tu negocio lo requiere.</div>
+    </details>
+    <details>
+      <summary>¿Puedo integrarlo con mi CRM o WhatsApp?</summary>
+      <div class="mt-2">Claro. Smart Fox integra nativamente con n8n para conectar CRMs, correo, WhatsApp Business, Google Calendar y más.</div>
+    </details>
+    <details>
+      <summary>¿El chat mantiene el historial?</summary>
+      <div class="mt-2">Sí, al volver a abrirlo recuperarás tu sesión anterior en este dispositivo.</div>
+    </details>
+  </section>
+
+  <!-- FOOTER / CTA -->
+  <footer role="contentinfo">
+    <div class="container footer-row">
+      <div class="footer-brand">
+        <picture>
+          <source srcset="logo-smartfox.webp" type="image/webp" />
+          <img class="logo-img" src="logo-smartfox.jpg" width="34" height="34" alt="Logo Smart Fox" decoding="async" loading="lazy" />
+        </picture>
+        <strong>Smart Fox</strong>
+      </div>
+      <div>
+        <button class="btn" type="button" onclick="window.openAgent()">Iniciar Chat</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Agent Overlay (embedded @n8n/chat) -->
+  <div id="agent-overlay" role="dialog" aria-modal="true" aria-label="Chat de Smart Fox">
+    <div class="agent-sheet">
+      <div class="agent-header">
+        <div class="agent-title">
+          <picture aria-hidden="true">
+            <source srcset="logo-smartfox.webp" type="image/webp" />
+            <img class="logo-img" src="logo-smartfox.jpg" width="22" height="22" alt="" decoding="async" loading="lazy" />
+          </picture>
+          <span>Agente Smart Fox</span>
+        </div>
+        <div class="agent-actions">
+          <button class="icon-btn" type="button" onclick="document.getElementById('agent-overlay').classList.remove('open')" aria-label="Cerrar chat">✕</button>
+        </div>
+      </div>
+      <div id="n8n-chat" style="height:100%; width:100%;"></div>
+    </div>
+  </div>
+
+  <!-- n8n chat script -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat@latest/dist/chat.bundle.es.js?v=2';
+
+    const defaults = {
+      webhookUrl: 'https://smartfox-latam.app.n8n.cloud/webhook/53c136fe-3e77-4709-a143-fe82746dd8b6/chat',
+      target: '#n8n-chat',
+      mode: 'fullscreen',
+      loadPreviousSession: true,
+      showWelcomeScreen: true,
+      enableStreaming: false,
+      i18n: {
+        es: {
+          title: '¡Hola! 👋',
+          subtitle: 'Inicia un chat. Estamos disponibles 24/7.',
+          getStarted: 'Comenzar',
+          inputPlaceholder: 'Escribe tu consulta…',
+          footer: ''
+        }
+      },
+      initialMessages: [
+        '¡Hola! Soy el Agente de Smart Fox. ¿En qué puedo ayudarte hoy?'
+      ]
+    };
+
+    let chatInstance = null;
+
+    function mountChat(initialMsgs){
+      const host = document.querySelector('#n8n-chat');
+      if (!host) return;
+      host.innerHTML = '';
+      const opts = { ...defaults, initialMessages: initialMsgs && initialMsgs.length ? initialMsgs : defaults.initialMessages };
+      chatInstance = createChat(opts);
+    }
+
+    // expone una función global para abrir el agente con un mensaje opcional
+    window.openAgent = (prompt) => {
+      document.getElementById('agent-overlay').classList.add('open');
+      const msgs = prompt ? [String(prompt)] : null;
+      mountChat(msgs);
+    };
+
+    // ESC para cerrar
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') document.getElementById('agent-overlay').classList.remove('open');
+    });
+  </script>
 </body>
 </html>

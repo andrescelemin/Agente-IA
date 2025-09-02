@@ -31,6 +31,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos del chat n8n -->
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat@latest/dist/style.css?v=2" rel="stylesheet" />
 
   <!-- Tu CSS externo -->
@@ -205,4 +207,30 @@
     </div>
   </footer>
 
-  
+  <!-- Script del chat n8n y función openAgent -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    // Inicializa el widget del chat con tu webhook de n8n
+    const chat = createChat({
+      webhookUrl: 'https://smarterfox.app.n8n.cloud/webhook/baafd661-8f4a-4b90-b7f9-75f69a227be3/chat'
+      // Puedes añadir más opciones aquí si las necesitas (por ejemplo: theme, i18n, etc.)
+    });
+
+    // Exponer una función global para abrir el chat (y enviar un primer mensaje opcional)
+    window.openAgent = (mensajeInicial) => {
+      if (mensajeInicial && typeof mensajeInicial === 'string') {
+        try {
+          chat.sendMessage(mensajeInicial);
+        } catch (e) {
+          // Si aún no está listo para enviar, simplemente abrimos el chat
+          console.warn('No se pudo enviar el mensaje inicial inmediatamente:', e);
+        }
+      }
+      chat.open();
+    };
+  </script>
+
+  <noscript>Activa JavaScript para usar el chat del Agente de IA.</noscript>
+</body>
+</html>

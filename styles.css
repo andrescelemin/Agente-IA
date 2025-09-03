@@ -1,31 +1,16 @@
 /* ===============================
    Smart Fox — Landing + Chat
-   Archivo: styles.css (v3)
+   Archivo: styles.css (v4)
    =============================== */
 
 /* ---------- Variables (tema) ---------- */
 :root{
-  /* Marca */
-  --brand:#ff6a00;
-  --brand-600:#f25f00;
-  --brand-700:#d94f00;
+  --brand:#ff6a00; --brand-600:#f25f00; --brand-700:#d94f00;
+  --ink:#0f172a; --ink-2:#1f2937; --muted:#cbd5e1; --text:#e5e7eb;
+  --bg:#0b1020; --card:#121a33; --ring: rgba(255,106,0,.35); --border:#1b2547;
+  --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.35); --maxw:1100px;
 
-  /* Base */
-  --ink:#0f172a;
-  --ink-2:#1f2937;
-  --muted:#cbd5e1;
-  --text:#e5e7eb;
-  --bg:#0b1020;
-  --card:#121a33;
-  --ring: rgba(255,106,0,.35);
-  --border:#1b2547;
-
-  /* Layout */
-  --radius:16px;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
-  --maxw:1100px;
-
-  /* Tema del widget n8n */
+  /* n8n chat */
   --chat--color-primary: var(--brand);
   --chat--color-primary-shade-50: var(--brand-600);
   --chat--color-primary-shade-100: var(--brand-700);
@@ -38,42 +23,29 @@
   --chat--color-dark:#0b1226;
   --chat--color-disabled:#4b5563;
   --chat--color-typing:#e5e7eb;
-
-  --chat--spacing:.9rem;
-  --chat--border-radius:14px;
-  --chat--transition-duration:.18s;
-  --chat--window--width:420px;
-  --chat--window--height:640px;
-  --chat--header--background:#0f172a;
-  --chat--header--color:#e5e7eb;
-  --chat--heading--font-size:1.25rem;
-  --chat--subtitle--line-height:1.5;
-  --chat--textarea--height:56px;
-  --chat--message--font-size:1rem;
-  --chat--message--bot--background:#0f172a;
-  --chat--message--bot--color:#e5e7eb;
+  --chat--spacing:.9rem; --chat--border-radius:14px; --chat--transition-duration:.18s;
+  --chat--window--width:420px; --chat--window--height:640px;
+  --chat--header--background:#0f172a; --chat--header--color:#e5e7eb;
+  --chat--heading--font-size:1.25rem; --chat--subtitle--line-height:1.5;
+  --chat--textarea--height:56px; --chat--message--font-size:1rem;
+  --chat--message--bot--background:#0f172a; --chat--message--bot--color:#e5e7eb;
   --chat--message--user--background:linear-gradient(180deg,var(--brand),var(--brand-700));
-  --chat--message--user--color:#fff;
-  --chat--toggle--background:var(--brand);
+  --chat--message--user--color:#fff; --chat--toggle--background:var(--brand);
   --chat--toggle--hover--background:var(--brand-600);
-  --chat--toggle--active--background:var(--brand-700);
-  --chat--toggle--color:#fff;
-  --chat--toggle--size:64px;
+  --chat--toggle--active--background:var(--brand-700); --chat--toggle--color:#fff; --chat--toggle--size:64px;
 }
 
 /* ---------- Reset mínimo y base ---------- */
 *{ box-sizing:border-box }
 html,body{ height:100% }
 body{
-  margin:0;
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
   color:var(--text);
   background:
     radial-gradient(1200px 600px at 10% -10%, rgba(255,106,0,.12), transparent 60%),
     radial-gradient(1200px 600px at 100% 0%, rgba(59,130,246,.10), transparent 60%),
     var(--bg);
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 img{ max-width:100%; height:auto; display:block }
 a{ color:inherit; text-decoration:none }
@@ -88,53 +60,9 @@ a{ color:inherit; text-decoration:none }
 .mt-3{ margin-top:.75rem } .mt-4{ margin-top:1rem } .mt-6{ margin-top:1.5rem }
 
 /* ---------- Botones ---------- */
-.btn{
-  display:inline-flex; align-items:center; gap:.65rem;
-  border:0; cursor:pointer; font-weight:700;
-  padding:.9rem 1.1rem; border-radius:999px;
-  line-height:1; position:relative;
+.btn{ display:inline-flex; align-items:center; gap:.65rem; border:0; cursor:pointer; font-weight:700;
+  padding:.9rem 1.1rem; border-radius:999px; line-height:1; position:relative;
   transition:transform .15s ease, box-shadow .2s ease, filter .15s ease, background .2s ease;
 }
 .btn__icon{ flex-shrink:0 }
-.btn--primary{
-  background:linear-gradient(180deg,var(--brand),var(--brand-700));
-  color:#fff; box-shadow:0 8px 30px -6px var(--ring);
-}
-.btn--primary:hover{ transform:translateY(-1px); box-shadow:0 14px 36px -10px var(--ring) }
-.btn--primary:active{ transform:translateY(0) scale(.99) }
-.btn--ghost{
-  background:#ffffff10; border:1px solid #ffffff22; color:var(--text);
-}
-.btn--ghost:hover{ border-color:#ffffff45; background:#ffffff15 }
-.icon-btn{
-  background:#ffffff10; border:1px solid #ffffff22; color:#fff;
-  border-radius:999px; width:38px; height:38px; display:grid; place-items:center;
-  cursor:pointer; transition:background .2s ease, border-color .2s ease;
-}
-.icon-btn:hover{ background:#ffffff15; border-color:#ffffff45 }
-.chip{
-  display:inline-flex; align-items:center; gap:.35rem;
-  border:1px solid #ffffff22; background:#ffffff10; color:#fff;
-  border-radius:999px; padding:.48rem .8rem; font-size:.92rem;
-  transition:border-color .2s ease, background .2s ease, transform .12s ease;
-}
-.chip:hover{ border-color:#ffffff45; background:#ffffff14; transform:translateY(-1px) }
-
-/* ---------- Hero ---------- */
-header.hero{
-  padding:clamp(2rem, 6vw, 4rem) 0 3rem; position:relative; overflow:hidden;
-  isolation:isolate; /* evita que el glow afecte stacking de secciones */
-}
-.hero__wrap{ display:flex; flex-direction:column; align-items:flex-start }
-.brand{ display:flex; align-items:center; gap:.8rem; color:#cbd5e1 }
-.brand__name{ letter-spacing:.2px }
-.badge{
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.35rem .6rem; border-radius:999px; font-size:.8rem;
-  color:#fff; background:#ffffff10; border:1px solid #ffffff22;
-}
-.hero__title{
-  font-size: clamp(2rem, 3.4vw + .8rem, 3.5rem);
-  line-height:1.05; margin:.9rem 0 .6rem; font-weight:800;
-}
-.hero__lead{ color:#d1d5db; font-size: clamp(1rem, 1.2vw + .6rem, 1.18rem); max-
+.btn--primary{ backgr

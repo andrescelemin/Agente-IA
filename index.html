@@ -27,7 +27,7 @@
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat@latest/dist/style.css?v=2" rel="stylesheet" />
 
   <!-- 👇 Tu CSS externo -->
-  <link href="styles.css?v=3" rel="stylesheet" />
+  <link href="styles.css?v=4" rel="stylesheet" />
 </head>
 <body>
   <!-- HERO -->
@@ -235,14 +235,12 @@
       chatInstance = createChat(opts);
     }
 
-    // expone una función global para abrir el agente con un mensaje opcional
     window.openAgent = (prompt) => {
       document.getElementById('agent-overlay').classList.add('open');
       const msgs = prompt ? [String(prompt)] : null;
       mountChat(msgs);
     };
 
-    // ESC para cerrar
     window.addEventListener('keydown', (e)=>{
       if(e.key === 'Escape') document.getElementById('agent-overlay').classList.remove('open');
     });

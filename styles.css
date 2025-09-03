@@ -1,6 +1,6 @@
 /* ===============================
    Smart Fox — Landing + Chat
-   Archivo: styles.css
+   Archivo: styles.css (v3)
    =============================== */
 
 /* ---------- Variables (tema) ---------- */
@@ -25,7 +25,7 @@
   --shadow:0 10px 30px rgba(0,0,0,.35);
   --maxw:1100px;
 
-  /* Tema del widget n8n (custom properties que el widget entiende) */
+  /* Tema del widget n8n */
   --chat--color-primary: var(--brand);
   --chat--color-primary-shade-50: var(--brand-600);
   --chat--color-primary-shade-100: var(--brand-700);
@@ -92,153 +92,49 @@ a{ color:inherit; text-decoration:none }
   display:inline-flex; align-items:center; gap:.65rem;
   border:0; cursor:pointer; font-weight:700;
   padding:.9rem 1.1rem; border-radius:999px;
-  background:linear-gradient(180deg,var(--brand),var(--brand-700));
-  color:#fff;
-  box-shadow:0 8px 30px -6px var(--ring);
-  transition:transform .15s ease, box-shadow .2s ease, filter .15s ease;
-  line-height:1;
+  line-height:1; position:relative;
+  transition:transform .15s ease, box-shadow .2s ease, filter .15s ease, background .2s ease;
 }
-.btn:hover{ transform:translateY(-1px); box-shadow:0 14px 36px -10px var(--ring) }
-.btn.secondary{ background:#ffffff10; border:1px solid #ffffff22; color:var(--text) }
+.btn__icon{ flex-shrink:0 }
+.btn--primary{
+  background:linear-gradient(180deg,var(--brand),var(--brand-700));
+  color:#fff; box-shadow:0 8px 30px -6px var(--ring);
+}
+.btn--primary:hover{ transform:translateY(-1px); box-shadow:0 14px 36px -10px var(--ring) }
+.btn--primary:active{ transform:translateY(0) scale(.99) }
+.btn--ghost{
+  background:#ffffff10; border:1px solid #ffffff22; color:var(--text);
+}
+.btn--ghost:hover{ border-color:#ffffff45; background:#ffffff15 }
 .icon-btn{
   background:#ffffff10; border:1px solid #ffffff22; color:#fff;
   border-radius:999px; width:38px; height:38px; display:grid; place-items:center;
-  cursor:pointer;
+  cursor:pointer; transition:background .2s ease, border-color .2s ease;
 }
+.icon-btn:hover{ background:#ffffff15; border-color:#ffffff45 }
 .chip{
   display:inline-flex; align-items:center; gap:.35rem;
   border:1px solid #ffffff22; background:#ffffff10; color:#fff;
   border-radius:999px; padding:.48rem .8rem; font-size:.92rem;
+  transition:border-color .2s ease, background .2s ease, transform .12s ease;
 }
-.chip:hover{ border-color:#ffffff45 }
+.chip:hover{ border-color:#ffffff45; background:#ffffff14; transform:translateY(-1px) }
 
 /* ---------- Hero ---------- */
-header.hero{ padding:clamp(2rem, 6vw, 4rem) 0 3rem; position:relative; overflow:hidden }
+header.hero{
+  padding:clamp(2rem, 6vw, 4rem) 0 3rem; position:relative; overflow:hidden;
+  isolation:isolate; /* evita que el glow afecte stacking de secciones */
+}
+.hero__wrap{ display:flex; flex-direction:column; align-items:flex-start }
 .brand{ display:flex; align-items:center; gap:.8rem; color:#cbd5e1 }
+.brand__name{ letter-spacing:.2px }
 .badge{
   display:inline-flex; align-items:center; gap:.5rem;
   padding:.35rem .6rem; border-radius:999px; font-size:.8rem;
   color:#fff; background:#ffffff10; border:1px solid #ffffff22;
 }
-.hero h1{
+.hero__title{
   font-size: clamp(2rem, 3.4vw + .8rem, 3.5rem);
   line-height:1.05; margin:.9rem 0 .6rem; font-weight:800;
 }
-.hero p.lead{ color:#d1d5db; font-size: clamp(1rem, 1.2vw + .6rem, 1.18rem); max-width: 62ch }
-.hero-cta{ margin-top:1.3rem; display:flex; gap:.8rem; flex-wrap:wrap }
-.trust{ display:flex; gap:1rem; flex-wrap:wrap; margin:1.6rem 0 0; color:#9ca3af; font-size:.9rem }
-
-/* ---------- Secciones / grid ---------- */
-.section{ padding:3.2rem 0 }
-.grid{ display:grid; gap:1.2rem; grid-template-columns:repeat(12, 1fr) }
-.grid.cols-3 > *{ grid-column: span 4 / span 4 }
-@media (max-width: 900px){ .grid.cols-3 > *{ grid-column: span 6 / span 6 } }
-@media (max-width: 640px){ .grid.cols-3 > *{ grid-column: span 12 / span 12 } }
-
-/* ---------- Tarjetas ---------- */
-.card{
-  background:linear-gradient(180deg,#0f1833,#0c1228);
-  border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem;
-  box-shadow:0 10px 18px -14px #000000aa;
-}
-.feature h3{ margin:.6rem 0 .3rem; font-size:1.08rem }
-.feature p{ color:#c7cad3; font-size:.99rem }
-.icon{
-  width:42px; height:42px; display:grid; place-items:center;
-  border-radius:12px; background:#ffffff10; border:1px solid #ffffff1a;
-}
-
-/* ---------- How it works ---------- */
-#como-funciona{ scroll-margin-top: 72px; }
-#como-funciona .steps{
-  display:grid; grid-template-columns:repeat(12,1fr); gap:1.1rem;
-}
-#como-funciona .steps .step{ grid-column:span 4 / span 4 }
-@media (max-width: 900px){ #como-funciona .steps .step{ grid-column:span 6 / span 6 } }
-@media (max-width: 640px){ #como-funciona .steps .step{ grid-column:span 12 / span 12 } }
-
-.step{
-  display:flex; flex-direction:column; justify-content:flex-start;
-  gap:.45rem; min-height:160px;
-  padding:1rem 1.1rem; border-radius:14px;
-  background:#0e1630; border:1px solid #17214a;
-}
-.step b{ color:#fff; font-size:1rem; line-height:1.25 }
-.step span{ color:#cbd5e1 }
-
-/* ---------- CTA rail ---------- */
-.cta-rail{
-  display:flex; align-items:center; justify-content:space-between; gap:1rem;
-  padding:1.1rem; background:linear-gradient(90deg,#131a34,#0f162e);
-  border:1px solid var(--border); border-radius:14px;
-}
-.agent-actions{ display:flex; gap:.6rem; flex-wrap:wrap }
-
-/* ---------- FAQ ---------- */
-details{ background:#0e1630; border:1px solid #18214a; border-radius:12px; padding:1rem 1.1rem }
-details+details{ margin-top:.7rem }
-summary{ cursor:pointer; font-weight:600 }
-summary:hover{ color:#ffe6d6 }
-summary:focus-visible{ outline:2px solid var(--brand); outline-offset:4px; border-radius:8px }
-
-/* ---------- Footer ---------- */
-footer{
-  color:#9aa3b2; padding:2.2rem 0; border-top:1px solid var(--border);
-  background:linear-gradient(180deg, transparent, #0b1226);
-}
-.footer-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem }
-.footer-brand{ display:flex; align-items:center; gap:.6rem; color:#cbd5e1 }
-
-/* ---------- Overlay del Agente ---------- */
-#agent-overlay{
-  position:fixed; inset:0; background:rgba(6,10,22,.62);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  display:none; z-index:60;
-}
-#agent-overlay.open{ display:block }
-.agent-sheet{
-  position:absolute; inset: min(5vh,36px) min(5vw,36px);
-  background:#0a0f22; border:1px solid #1c274d; border-radius:18px;
-  display:grid; grid-template-rows:auto 1fr; overflow:hidden;
-}
-.agent-header{
-  display:flex; align-items:center; justify-content:space-between; gap:.8rem;
-  padding:.8rem 1rem; border-bottom:1px solid var(--border); background:#0f172a;
-}
-.agent-title{ display:flex; align-items:center; gap:.7rem; font-weight:700 }
-.agent-actions{ display:flex; align-items:center; gap:.5rem }
-
-/* ---------- White-label (demo) ---------- */
-.wl .pill{
-  display:inline-flex; align-items:center; gap:.45rem;
-  padding:.32rem .6rem; border-radius:999px; font-size:.8rem;
-  color:#fff; background:#ffffff12; border:1px solid #ffffff24;
-}
-.wl-wrap{ display:grid; grid-template-columns:repeat(12,1fr); gap:1.2rem }
-.wl-col{ grid-column:span 6 / span 6 }
-@media (max-width: 900px){ .wl-col{ grid-column:span 12 / span 12 } }
-
-.wl-list{ margin:.7rem 0 1.1rem; padding-left:1rem; color:#c7cad3 }
-.wl-list li{ margin:.35rem 0 }
-
-.wl-card{
-  background:linear-gradient(180deg,#101a39,#0b1229);
-  border:1px solid var(--border); border-radius:16px; padding:1rem;
-}
-.wl-mock{ border:1px dashed #2b3967; border-radius:14px; padding:1rem; background:#0f172a }
-.wl-mock .dot{
-  width:6px; height:6px; background:#475569; border-radius:999px;
-  display:inline-block; margin-right:4px;
-}
-.msg{ font-size:.98rem; padding:.6rem .8rem; border-radius:12px; margin:.5rem 0; max-width:38ch }
-.msg.bot{ background:#0b1226; color:#e5e7eb }
-.msg.you{ background:linear-gradient(180deg,var(--brand),var(--brand-700)); color:#fff; margin-left:auto }
-.wl-cta{ display:flex; gap:.6rem; flex-wrap:wrap }
-
-/* ---------- Logo (imagen) ---------- */
-.logo-img{
-  width:34px; height:34px; border-radius:50%;
-  object-fit:cover; display:block;
-  box-shadow:0 0 0 2px #ffffff12;
-}
-.agent-title .logo-img{ width:22px; height:22px; box-shadow:none }
+.hero__lead{ color:#d1d5db; font-size: clamp(1rem, 1.2vw + .6rem, 1.18rem); max-
